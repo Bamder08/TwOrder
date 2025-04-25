@@ -27,7 +27,7 @@ Compatible con `class` y `className` en HTML, React, Vue y más.
 # ⚙️ Configuración Personalizada
 Puedes definir tu propio orden de clases Tailwind en tu configuración de usuario de VSCode (settings.json):
 
-```bash
+```json
     "tworder.classOrder": [
         "flex", "block", "inline-block",
         "mt", "mb", "p", "text", "bg",
