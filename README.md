@@ -24,7 +24,7 @@ Compatible con `class` y `className` en HTML, React, Vue y más.
    npm install
    npm run package
    ```
-Tambien puedes buscar la extensión directamente en el marketplace de vscode
+Tambien puedes buscar la extensión directamente en el marketplace de VSCode
 
 ## ⚙️ Configuración Personalizada
 
