@@ -24,14 +24,15 @@ Compatible con `class` y `className` en HTML, React, Vue y más.
    npm install
    npm run package
 
-# ⚙️ Configuración Personalizada
-Puedes definir tu propio orden de clases Tailwind en tu configuración de usuario de VSCode (settings.json):
+## ⚙️ Configuración Personalizada
+
+Puedes definir tu propio orden de clases Tailwind en tu configuración de usuario de VSCode (`settings.json`):
 
 ```json
-    "tworder.classOrder": [
-        "flex", "block", "inline-block",
-        "mt", "mb", "p", "text", "bg",
-        "rounded", "shadow", "hover"
-    ]
+"tworder.classOrder": [
+  "flex", "block", "inline-block",
+  "mt", "mb", "p", "text", "bg",
+  "rounded", "shadow", "hover"
+]
 
 Si no defines nada, se usa un orden por defecto incluido en la extensión.
