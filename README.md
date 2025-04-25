@@ -23,6 +23,8 @@ Compatible con `class` y `className` en HTML, React, Vue y más.
    ```bash
    npm install
    npm run package
+   ```
+Tambien puedes buscar la extensión directamente en el marketplace de vscode
 
 ## ⚙️ Configuración Personalizada
 
