@@ -3,6 +3,7 @@
   "displayName": "TwOrder",
   "description": "Ordena automáticamente las clases de Tailwind CSS",
   "version": "0.0.1",
+  "publisher": "bamder08",
   "engines": {
     "vscode": "^1.99.0"
   },
