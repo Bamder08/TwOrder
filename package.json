@@ -1,5 +1,52 @@
 {
+  "name": "tworder",
+  "displayName": "TwOrder",
+  "description": "Ordena automáticamente las clases de Tailwind CSS",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.99.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "tworder.orderTailwindClasses",
+        "title": "Order Tailwind Classes"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "TWorder Configuración",
+      "properties": {
+        "tworder.classOrder": {
+          "type": "array",
+          "description": "Orden personalizado de clases Tailwind. Si no se establece, se usa el orden por defecto.",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      }
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.99.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1",
+    "eslint": "^9.23.0"
+  },
   "dependencies": {
-    "pnpm": "^10.9.0"
+    "tailwindcss": "^4.1.4"
   }
 }
