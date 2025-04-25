@@ -1,36 +1,60 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
+const tailwindOrder = [
+	'static', 'fixed', 'absolute', 'relative', 'sticky',
+	'flex', 'inline-flex', 'block', 'inline-block', 'grid', 'inline-grid',
+	'float-left', 'float-right', 'clear-both',
+	'mt', 'mb', 'ml', 'mr', 'pt', 'pb', 'pl', 'pr', 'p', 'm',
+	'w', 'h', 'min-w', 'max-w', 'min-h', 'max-h',
+	'bg', 'text', 'border', 'rounded',
+	'shadow', 'ring', 'opacity',
+	'z', 'gap', 'space', 'justify', 'items', 'content', 'self',
+	'overflow', 'transition', 'duration', 'ease',
+	'hover', 'focus', 'active', 'disabled',
+];
 
-/**
- * @param {vscode.ExtensionContext} context
- */
+
 function activate(context) {
-
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "tworder" is now active!');
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with  registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('tworder.helloWorld', function () {
-		// The code you place here will be executed every time your command is executed
-
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from TwOrder!');
+	let disposable = vscode.commands.registerCommand('tworder.orderTailwindClasses', async function () {
+		const editor = vscode.window.activeTextEditor;
+		if (!editor) {
+			vscode.window.showErrorMessage('No editor is active.');
+			return;
+		}
+	
+		const selection = editor.selection;
+		const text = editor.document.getText(selection);
+	
+		if (!text) {
+			vscode.window.showErrorMessage('No text selected.');
+			return;
+		}
+	
+		// Ordenar clases
+		const orderedText = text
+			.split(/\s+/)
+			.sort((a, b) => {
+				const aIndex = tailwindOrder.findIndex(prefix => a.startsWith(prefix));
+				const bIndex = tailwindOrder.findIndex(prefix => b.startsWith(prefix));
+				return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
+			})
+			.join(' ');
+	
+		// Reemplazar selección
+		editor.edit(editBuilder => {
+			editBuilder.replace(selection, orderedText);
+		});
+	
+		vscode.window.showInformationMessage('Clases Tailwind ordenadas ✅');
 	});
+	
 
-	context.subscriptions.push(disposable);
+  context.subscriptions.push(disposable);
 }
 
-// This method is called when your extension is deactivated
 function deactivate() {}
 
 module.exports = {
-	activate,
-	deactivate
-}
+  activate,
+  deactivate
+};
