@@ -26,7 +26,7 @@ Compatible con `class` y `className` en HTML, React, Vue y más.
 
 ## ⚙️ Configuración Personalizada
 
-Puedes definir tu propio orden de clases Tailwind en tu configuración de usuario de VSCode (`settings.json`):
+Puedes definir tu propio orden de clases Tailwind en tu configuración de usuario de VSCode (`settings.json`), ejemplo:
 
 ```json
     "tworder.classOrder": [
@@ -37,3 +37,32 @@ Puedes definir tu propio orden de clases Tailwind en tu configuración de usuari
 ```
 
 Si no define nada, se usa un orden por defecto incluido en la extensión.
+
+# 🚀 Cómo usar
+1. Abre el archivo que quieras ordenar.
+
+2. Abre la paleta de comandos (`Ctrl+Shift+P`).
+
+3. Escribe y selecciona:
+**"TWorder: Ordenar Clases Tailwind"**
+
+¡Listo! Las clases se ordenan automáticamente y tu archivo se formatea.
+
+# 📋 Ejemplo
+**Antes**
+```json
+    <div class="text-white flex justify-center mt-4 bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded">
+    Botón
+    </div>
+```
+
+**Después**
+```json
+    <div class="flex mt-4 py-2 px-4 bg-blue-500 text-white font-bold rounded hover:bg-blue-700 justify-center">
+    Botón
+    </div>
+```
+
+# 🙌 Contribuciones
+¿Tienes ideas para mejorar la extensión?
+¡Sientete libre de abrir un issue o pull request!
