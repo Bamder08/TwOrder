@@ -68,3 +68,6 @@ Si no define nada, se usa un orden por defecto incluido en la extensión.
 # 🙌 Contribuciones
 ¿Tienes ideas para mejorar la extensión?
 ¡Sientete libre de abrir un issue o pull request!
+
+## Licencia
+Este proyecto está licenciado bajo la [Licencia MIT](./LICENSE).

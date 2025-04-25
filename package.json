@@ -9,7 +9,9 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onCommand:tworder.orderTailwindClasses"
+  ],
   "main": "./extension.js",
   "contributes": {
     "commands": [
@@ -33,6 +35,14 @@
       }
     }
   },
+  "keywords": [
+    "tailwind",
+    "sort",
+    "formatter",
+    "order",
+    "tworder"
+  ],
+  "license": "MIT",
   "scripts": {
     "lint": "eslint .",
     "pretest": "npm run lint",
