@@ -42,7 +42,15 @@
     "order",
     "tworder"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bamder08/TwOrder"
+  },
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Bamder08/TwOrder/issues"
+  },
+  "homepage": "https://github.com/Bamder08/TwOrder#readme",
   "scripts": {
     "lint": "eslint .",
     "pretest": "npm run lint",
