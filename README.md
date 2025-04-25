@@ -34,4 +34,5 @@ Puedes definir tu propio orden de clases Tailwind en tu configuración de usuari
   "mt", "mb", "p", "text", "bg",
   "rounded", "shadow", "hover"
 ]
+
 Si no define nada, se usa un orden por defecto incluido en la extensión.
