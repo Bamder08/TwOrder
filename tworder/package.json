@@ -17,7 +17,21 @@
         "command": "tworder.orderTailwindClasses",
         "title": "Order Tailwind Classes"
       }
-    ]
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "TWorder Configuración",
+      "properties": {
+        "tworder.classOrder": {
+          "type": "array",
+          "description": "Orden personalizado de clases Tailwind. Si no se establece, se usa el orden por defecto.",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      }
+    }
   },
   "scripts": {
     "lint": "eslint .",

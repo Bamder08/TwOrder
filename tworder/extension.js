@@ -21,36 +21,65 @@ function activate(context) {
 			vscode.window.showErrorMessage('No editor is active.');
 			return;
 		}
-	
-		const selection = editor.selection;
-		const text = editor.document.getText(selection);
-	
-		if (!text) {
-			vscode.window.showErrorMessage('No text selected.');
+
+		// Leer configuración personalizada del usuario
+		const config = vscode.workspace.getConfiguration('tworder');
+		const customOrder = config.get('classOrder');
+
+		const order = Array.isArray(customOrder) && customOrder.length > 0 ? customOrder : tailwindOrder;
+
+		let selection = editor.selection;
+		let text = editor.document.getText(selection);
+
+		// Si no hay selección, tomar todo el documento
+		if (selection.isEmpty) {
+			const firstLine = editor.document.lineAt(0);
+			const lastLine = editor.document.lineAt(editor.document.lineCount - 1);
+			selection = new vscode.Selection(firstLine.range.start, lastLine.range.end);
+			text = editor.document.getText(selection);
+		}
+
+		const classRegex = /(class|className)=["']([^"']*)["']/g;
+		let match;
+		let replacedText = text;
+
+		while ((match = classRegex.exec(text)) !== null) {
+			const fullMatch = match[0];
+			const attrName = match[1];
+			const classValue = match[2];
+
+			const orderedClassValue = classValue
+				.split(/\s+/)
+				.sort((a, b) => {
+					const aIndex = order.findIndex(prefix => a.startsWith(prefix));
+					const bIndex = order.findIndex(prefix => b.startsWith(prefix));
+					return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
+				})
+				.join(' ');
+
+			const orderedFullMatch = `${attrName}="${orderedClassValue}"`;
+			replacedText = replacedText.replace(fullMatch, orderedFullMatch);
+		}
+
+		if (replacedText === text) {
+			vscode.window.showErrorMessage('No se encontraron atributos class o className para ordenar.');
 			return;
 		}
-	
-		// Ordenar clases
-		const orderedText = text
-			.split(/\s+/)
-			.sort((a, b) => {
-				const aIndex = tailwindOrder.findIndex(prefix => a.startsWith(prefix));
-				const bIndex = tailwindOrder.findIndex(prefix => b.startsWith(prefix));
-				return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
-			})
-			.join(' ');
-	
-		// Reemplazar selección
-		editor.edit(editBuilder => {
-			editBuilder.replace(selection, orderedText);
-		});
-	
-		vscode.window.showInformationMessage('Clases Tailwind ordenadas ✅');
-	});
-	
 
-  context.subscriptions.push(disposable);
+		await editor.edit(editBuilder => {
+			editBuilder.replace(selection, replacedText);
+		});
+
+		// Formatear automáticamente el documento
+		await vscode.commands.executeCommand('editor.action.formatDocument');
+
+		vscode.window.showInformationMessage('Clases Tailwind ordenadas y documento formateado ✅');
+	});
+
+	context.subscriptions.push(disposable);
 }
+
+
 
 function deactivate() {}
 
